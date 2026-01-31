@@ -1,19 +1,31 @@
+import java.util.*;
+
 class Solution {
-    public int[] runningSum(int[] nums) {
+    public int[] getSumAbsoluteDifferences(int[] nums) {
 
-        int n = nums.length;
 
-        int sum=0;
+        int left_val, right_val, left_sum=0, i, n=nums.length;
 
-        int[] result;
+        int[] result = new int[n];
 
-        result = new int[n];
+        int total_sum=0;
 
-        for(int i=0;i<n;i++){
-
-            sum=sum+nums[i];
-            result[i]=sum;
+        for(i=0; i<n ; i++)
+        {
+            total_sum+=nums[i];
         }
-        return result;   
+
+        for(i=0; i<n; i++)
+        {
+            left_val = (nums[i]*i)-left_sum;
+            right_val = (total_sum-left_sum-nums[i]*(n-i));
+
+            left_sum+=nums[i];
+
+            result[i]=left_val+right_val;
+        }
+
+        return result;
+
     }
 }
